@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html class="no-js">
+
+<head>
+    <title>Tea Garden || Assam</title>
+
+    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <!-- For IE -->
+    <meta https-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- For Resposive Device -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="56x56" href="images/logo1.png">
+
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css'
+        rel='stylesheet' />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-measure/dist/leaflet-measure.css" />
+    <!-- styles for this template -->
+    <link rel="stylesheet" href="styles/stylesheets/main.css">
+
+
+    <!--leaflet js-->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="markerIcon.js"></script>
+    <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script><!-- DOM Utility Library -->
+    <script src="https://unpkg.com/leaflet-measure/dist/leaflet-measure.js"></script>
+    <script src="lib/L.Geoserver.js"></script>
+    <script src="dist/leaflet.browser.print.min.js"></script>
+</head>
+
+<body>
+    <div class="preloader"></div>
+    <!--[if lt IE 10]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+    <!-- Disclaimer Modal (the thing that pops down when the page loads, usually used for disclaimers, about sections, etc.) -->
+    <div class="modal fade" id="disclaimer-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Tea Garden of Udalguri,Assam</h4>
+                </div>
+
+
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!-- End Disclaimer Modal -->
+
+    <!-- Start Header -->
+    <header>
+        <!-- <div id="org-bar">
+                <h2 style="float: right;"></h2>
+            </div> -->
+        <div id="title-bar">
+            <img id="logo" src="image/Tea_Garden.png" alt="TeaGardenmap" title="Assam State Space Application Center"
+                width="70px" height="55px">
+            </a>
+            <h1 style="float: right; margin-top: 8px;"><img src="image/ASSAC_logo.png" width="52px" height="52px"></h1>
+            <h5 style="text-align: center;">LOCATION BASED WEBGIS DASHBOARD OF SMALL TEA GARDENS IN UDALGURI DISTRICT OF
+                ASSAM
+            </h5>
+            
+        </div>
+        <div id="office-bar">
+            <h5 style="float: right;">Assam State Space Application Centre, Guwahati </h5>
+        </div>
+        <div class="col-md-12" style="margin-top: 5px;">
+            <div class="input-group">
+
+                <!-- <label class="input-group-text" style="color: #3d1bff">TEA GARDEN FILTER &nbsp;</label>
+                <select id="search" style="width:200px;"></select>
+                &nbsp;&nbsp;&nbsp; -->
+                &nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;
+                <label class="input-group-text" for="selectButton" style="color: #3d1bff">DISTRICT FILTER &nbsp;</label>
+                <select class="custom-select" id="selectButton" style="width:150px;">
+                    <option selected>Select District</option>
+                </select>
+                &nbsp;&nbsp;&nbsp;
+                <label class="input-group-text" for="selectButton1" style="color: #3d1bff">VILLAGE FILTER
+                    &nbsp;</label>
+                <select class="custom-select" id="selectButton1" style="width:150px;">
+                    <option selected>Select Village</option>
+                </select>
+                &nbsp;&nbsp;&nbsp;
+                <label class="input-group-text" for="selectButton2" style="color: #3d1bff">TEA GARDEN FILTER
+                    &nbsp;</label>
+                <select class="custom-select" id="selectButton2" style="width:150px;">
+                    <option selected>Select Tea Garden</option>
+                </select>
+                &nbsp;&nbsp;&nbsp;
+                <label class="input-group-text" for="selectButton3" style="color: #3d1bff">TEA FACTORY FILTER
+                    &nbsp;</label>
+                <select class="custom-select" id="selectButton3" style="width:150px;">
+                    <option selected>Select Factory</option>
+                </select>
+                &nbsp;&nbsp;&nbsp;
+                <label class="input-group-text" style="color: #3d1bff">DATA COUNT &nbsp;</label>
+                <span id="dataCount"></span>&nbsp;&nbsp;&nbsp;
+                <button class="btn btn-primary btn-xs" id="resetMap">RESET MAP</button>
+                &nbsp;&nbsp;&nbsp;
+            </div>
+        </div>
+
+    </header>
+    <!-- End Header -->
+
+
+    <!-- Start Map -->
+    <section id="base"></section>
+    <!-- End Map -->
+
+
+    <!-- Start Footer -->
+    <footer>
+        <div id="links">
+            <p>Assam State Space Application Center</p>
+            <p>&copy; 2023 | ASSAC</p>
+
+        </div>
+    </footer>
+    <!-- End Footer -->
+
+
+    <!-- Vendor Scripts -->
+
+
+    <!-- <script src="scripts/vendor/esri-leaflet.js"></script> Use ESRI Basemaps under ESRI TOS -->
+    <!-- <script src="scripts/vendor/leaflet-sidebar.js"></script> Sidebar plugin for Leaflet -->
+
+    <!-- <script src="scripts/vendor/easy-button.js"></script> Font Awesome Buttons -->
+
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <!-- Twitter Bootstrap JavaScript Functions -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
+    <!-- JavaScript Utility Library -->
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"
+        integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script>
+    <!-- Used to make the sidebar resizeable -->
+
+    <!-- Custom Scripts -->
+    <script src="getCoords.js"></script>
+    <script src="getVillCoords.js"></script>
+
+
+    <script src="main.js"></script> <!-- Scripts Specific to this Project -->
+    <script src="esri-leaflet.js"></script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/js/select2.min.js"></script>
+
+</body>
+
+</html>
